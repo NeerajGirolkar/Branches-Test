@@ -19,15 +19,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	
 	public EmployeeDaoImpl() { }
 	
-	private DataSource dataSource;
+	private DataSource datasource;
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setDatasource(DataSource dataSource) {
+		this.datasource = dataSource;
 	}
 
 	@Override
 	public void save(Employee employee) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
 		String sql = "INSERT INTO EMPLOYEE (ID, FIRST_NAME, DEPARTMENT, ACCOUNT_ID, BALANCE) values (?,?,?,?,?)";
 		Object[] args = new Object[] {employee.getId(), employee.getFirstName(), employee.getDepartment(),
 										employee.getAccount().getAccountNo(), employee.getAccount().getBalance()};
@@ -42,7 +42,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee getById(int id) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
 		String sql = "SELECT * FROM EMPLOYEE WHERE ID = ?;";
 		Employee employee = jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<Employee>(){
 
@@ -64,7 +64,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
 		String sql = "SELECT * FROM EMPLOYEE;";
 		List<Employee> employees = new ArrayList<Employee>();
 		List<Map<String, Object>> empRow = jdbcTemplate.queryForList(sql);

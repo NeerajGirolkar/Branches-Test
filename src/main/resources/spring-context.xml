@@ -15,15 +15,16 @@
 		<property name="accountNo" value="1234"></property>
 		<property name="balance" value="200000"></property>
 	</bean>
+	
 
 
  	<!-- Use of JDBC Template -->
-	<bean id="employeeDAO" class="com.dashboard.dao.impl.EmployeeDaoImpl">
-		<property name="dataSource" ref="datasource" />
+	<bean id="employeeDAO" class="com.dashboard.dao.impl.EmployeeDaoImpl" autowire="byName">
+		
 	</bean>
 	
 	<!-- Use of JDBC DAO Support -->
-	<bean id="employeeDAOSupport" class="com.dashboard.dao.impl.EmployeeDaoSupportImpl">
+	<bean id="employeeDAOSupport" class="com.dashboard.dao.impl.EmployeeDaoSupportImpl" >
 		<property name="dataSource" ref="datasource" />
 	</bean>
 
@@ -33,6 +34,5 @@
 		<property name="username" value="root" />
 		<property name="password" value="admin" />
 	</bean>
-
 
 </beans>
