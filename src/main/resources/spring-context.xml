@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="employee" class="com.dashboard.to.Employee">
+		<property name="id" value="444"></property>
+		<property name="firstName" value="Adam"></property>
+		<property name="department" value="QA"></property>
+		<property name="account" ref="account"></property>
+	</bean>
+
+	<bean id="account" class="com.dashboard.to.Account">
+		<property name="accountNo" value="1234"></property>
+		<property name="balance" value="200000"></property>
+	</bean>
+
+
+ 	<!-- Use of JDBC Template -->
+	<bean id="employeeDAO" class="com.dashboard.dao.impl.EmployeeDaoImpl">
+		<property name="dataSource" ref="datasource" />
+	</bean>
+	
+	<!-- Use of JDBC DAO Support -->
+	<bean id="employeeDAOSupport" class="com.dashboard.dao.impl.EmployeeDaoSupportImpl">
+		<property name="dataSource" ref="datasource" />
+	</bean>
+
+	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/spring-test" />
+		<property name="username" value="root" />
+		<property name="password" value="admin" />
+	</bean>
+
+
+</beans>
